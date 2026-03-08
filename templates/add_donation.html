@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Record Donation{% endblock %}
+{% block header %}Record Donation{% endblock %}
+
+{% block content %}
+<style>
+  .form-container label          { font-size: 1.042rem !important; }
+  .form-container input,
+  .form-container select,
+  .form-container textarea,
+  .form-container .form-control  { font-size: 1.187rem !important; padding: 13px 15px !important; }
+  .form-container .btn           { font-size: 1.158rem !important; padding: 13px 22px !important; }
+  .form-container .error-box     { font-size: 1.157rem !important; }
+</style>
+<div class="form-container">
+    <form method="POST">
+
+        {% if error %}
+        <div class="error-box">{{ error }}</div>
+        {% endif %}
+
+        <label>Select Donor</label>
+        <select name="donor_id" id="donor_select" class="form-control" required>
+            <option value="">Select a donor</option>
+            {% for d in donors %}
+            <option value="{{ d[0] }}" data-blood-group="{{ d[2] }}">{{ d[1] }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Blood Group</label>
+        <select name="blood_group" id="blood_group" class="form-control" required>
+            <option value="">Select blood group</option>
+            {% for bg in ['O+','O-','A+','A-','B+','B-','AB+','AB-'] %}
+            <option value="{{ bg }}">{{ bg }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Units Donated</label>
+        <input class="form-control" type="number" name="units" min="1" placeholder="e.g. 1" required>
+
+        <button class="btn btn-success w-100 mt-3">Record Donation</button>
+
+    </form>
+</div>
+
+<script>
+    document.getElementById('donor_select').addEventListener('change', function () {
+        const bg = this.options[this.selectedIndex].getAttribute('data-blood-group');
+        document.getElementById('blood_group').value = bg || '';
+    });
+</script>
+{% endblock %}

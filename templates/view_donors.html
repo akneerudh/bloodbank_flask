@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}View Donors{% endblock %}
+{% block header %}Donor List{% endblock %}
+
+{% block content %}
+
+<div class="donor-controls">
+    {% if undo_available %}
+    <form method="POST" action="/undo_delete" style="display:inline;">
+        <button type="submit" class="btn btn-warning btn-sm">↩ Undo Delete</button>
+    </form>
+    {% endif %}
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>DOB</th>
+                <th>Gender</th>
+                <th>Blood Group</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donor in donors %}
+            <tr>
+                <td style="color: var(--muted); font-size: 1.155rem;">{{ donor[0] }}</td>
+                <td style="font-weight: 500; color: var(--white);">{{ donor[1] }}</td>
+                <td>{{ donor[2] }}</td>
+                <td>{{ donor[3] }}</td>
+                <td><span class="badge">{{ donor[4] }}</span></td>
+                <td>{{ donor[5] }}</td>
+                <td style="color: var(--muted-2);">{{ donor[6] }}</td>
+                <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--muted-2);">{{ donor[7] }}</td>
+                <td>
+                    <form method="POST" action="/delete_donor/{{ donor[0] }}" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Delete this donor?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

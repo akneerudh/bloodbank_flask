@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Add Donor{% endblock %}
+{% block header %}Add Donor{% endblock %}
+
+{% block content %}
+<style>
+  .form-container label          { font-size: 1.042rem !important; }
+  .form-container input,
+  .form-container select,
+  .form-container textarea,
+  .form-container .form-control  { font-size: 1.187rem !important; padding: 13px 15px !important; }
+  .form-container .btn           { font-size: 1.158rem !important; padding: 13px 22px !important; }
+  .form-container .alert-danger  { font-size: 1.157rem !important; }
+</style>
+<div class="form-container">
+    <form method="POST">
+
+        {% if error %}
+        <div class="alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <label>Full Name</label>
+        <input type="text" name="name" class="form-control" placeholder="e.g. Arjun Sharma" required value="{{ request.form.name or '' }}">
+
+        <label>Date of Birth</label>
+        <input type="date" name="dob" class="form-control" required value="{{ request.form.dob or '' }}">
+
+        <label>Gender</label>
+        <select name="gender" class="form-control" required>
+            <option value="Male"   {% if request.form.gender=='Male'   %}selected{% endif %}>Male</option>
+            <option value="Female" {% if request.form.gender=='Female' %}selected{% endif %}>Female</option>
+            <option value="Other"  {% if request.form.gender=='Other'  %}selected{% endif %}>Other</option>
+        </select>
+
+        <label>Blood Group</label>
+        <select name="blood_group" class="form-control" required>
+            <option value="">Select blood group</option>
+            {% for bg in ['O+','O-','A+','A-','B+','B-','AB+','AB-'] %}
+            <option value="{{ bg }}" {% if request.form.blood_group==bg %}selected{% endif %}>{{ bg }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Phone</label>
+        <input type="tel" name="phone" class="form-control" placeholder="10-digit number" required
+               pattern="\d{10}" maxlength="10" title="Enter 10-digit phone number"
+               value="{{ request.form.phone or '' }}">
+
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" placeholder="optional" value="{{ request.form.email or '' }}">
+
+        <label>Address</label>
+        <textarea name="address" class="form-control" rows="3" placeholder="optional">{{ request.form.address or '' }}</textarea>
+
+        <button class="btn btn-success w-100 mt-3">Add Donor</button>
+
+    </form>
+</div>
+{% endblock %}

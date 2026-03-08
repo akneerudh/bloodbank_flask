@@ -1,0 +1,70 @@
+======================================================
+  SQLite - How to View bloodbank.db Tables
+======================================================
+
+-- OPEN the database (run from bloodbank_flask folder) --
+
+    sqlite3 bloodbank.db
+
+
+-- ONCE INSIDE the sqlite3 shell --
+
+List all tables:
+    .tables
+
+View schema (column names + types) for all tables:
+    .schema
+
+View schema for a specific table:
+    .schema Donor
+
+Turn on column headers and aligned output:
+    .headers on
+    .mode column
+
+-- VIEW ALL ROWS --
+
+    SELECT * FROM Donor;
+    SELECT * FROM Donation;
+    SELECT * FROM BloodStock;
+    SELECT * FROM Request;
+
+-- USEFUL QUERIES --
+
+Count rows in each table:
+    SELECT COUNT(*) FROM Donor;
+    SELECT COUNT(*) FROM Donation;
+    SELECT COUNT(*) FROM BloodStock;
+    SELECT COUNT(*) FROM Request;
+
+View donors with their blood group:
+    SELECT donor_id, name, blood_group, phone FROM Donor;
+
+View current blood stock:
+    SELECT * FROM BloodStock ORDER BY blood_group;
+
+View donations by donor name:
+    SELECT d.name, dn.blood_group, dn.units, dn.donation_date
+    FROM Donation dn
+    JOIN Donor d ON d.donor_id = dn.donor_id;
+
+-- EXIT the sqlite3 shell --
+
+    .quit
+
+
+======================================================
+  If sqlite3 is not recognised as a command
+======================================================
+
+Download it from: https://www.sqlite.org/download.html
+  -> Windows section -> sqlite-tools-win-x64-*.zip
+  -> Extract sqlite3.exe and place it in:
+       C:\Windows\System32\
+  OR add the folder containing sqlite3.exe to your PATH.
+
+Alternatively, use the DB Browser for SQLite (GUI):
+  https://sqlitebrowser.org/dl/
+  -> Open bloodbank.db directly — no commands needed.
+
+======================================================

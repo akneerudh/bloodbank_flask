@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Request Blood{% endblock %}
+{% block header %}Request Blood{% endblock %}
+
+{% block content %}
+<style>
+  .form-container label          { font-size: 1.105rem !important; }
+  .form-container input,
+  .form-container select,
+  .form-container textarea,
+  .form-container .form-control  { font-size: 1.25rem !important; padding: 14px 16px !important; }
+  .form-container .btn           { font-size: 1.22rem !important; padding: 14px 24px !important; }
+</style>
+<div class="form-container">
+
+    {% if error %}
+    <div class="alert-warning-custom">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-content">
+            <strong>Units Not Available</strong>
+            <p>{{ error }}</p>
+        </div>
+        <button class="alert-close" onclick="this.parentElement.style.display='none'">✕</button>
+    </div>
+    {% endif %}
+
+    <form method="POST">
+
+        <label>Patient Name</label>
+        <input type="text" name="patient" class="form-control" placeholder="Full name" required>
+
+        <label>Blood Group</label>
+        <select name="blood_group" class="form-control" required>
+            <option value="">Select blood group</option>
+            {% for bg in ['O+','O-','A+','A-','B+','B-','AB+','AB-'] %}
+            <option value="{{ bg }}">{{ bg }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Units Required</label>
+        <input type="number" name="units" class="form-control" min="1" placeholder="e.g. 2" required>
+
+        <button class="btn btn-warning w-100 mt-3">Submit Request</button>
+
+    </form>
+</div>
+{% endblock %}

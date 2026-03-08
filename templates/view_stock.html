@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Blood Stock{% endblock %}
+{% block header %}Current Stock{% endblock %}
+
+{% block content %}
+<style>
+  .badge { font-size: 1.25rem !important; padding: 9px 18px !important; }
+  .view-stock-table thead th { font-size: 1.2rem !important; padding: 28px 28px !important; }
+  .view-stock-table tbody td { font-size: 1.4rem !important; padding: 32px 28px !important; }
+</style>
+<div class="table-container view-stock-table" style="max-width: 560px;">
+    <table>
+        <thead>
+            <tr>
+                <th>Blood Group</th>
+                <th>Units Available</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in stock %}
+            <tr>
+                <td><span class="badge">{{ row[0] }}</span></td>
+                <td style="font-weight: 600; font-variant-numeric: tabular-nums; color: var(--white);">{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

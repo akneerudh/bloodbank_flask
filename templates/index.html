@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block header %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-hero">
+    <div class="hero-glow"></div>
+    <div class="hero-text">
+        <p class="hero-eyebrow">Welcome back</p>
+        <h1>Blood Bank<br><span class="hero-accent">Management</span></h1>
+        <p class="hero-sub">Manage donors, donations, stock, and blood requests, all from one place.</p>
+    </div>
+</div>
+
+<div class="dashboard-grid">
+
+    <a class="dashboard-card" href="/add_donor">
+        <div class="card-top">
+            <div class="card-icon">🧑</div>
+            <span class="card-arrow">→</span>
+        </div>
+        <div class="card-label">Donors</div>
+        <div class="card-title">Add Donor</div>
+        <p class="card-desc">Register a new blood donor into the system.</p>
+    </a>
+
+    <a class="dashboard-card" href="/add_donation">
+        <div class="card-top">
+            <div class="card-icon">🩸</div>
+            <span class="card-arrow">→</span>
+        </div>
+        <div class="card-label">Donations</div>
+        <div class="card-title">Record Donation</div>
+        <p class="card-desc">Log a blood donation from an existing donor.</p>
+    </a>
+
+    <a class="dashboard-card" href="/view_stock">
+        <div class="card-top">
+            <div class="card-icon">📦</div>
+            <span class="card-arrow">→</span>
+        </div>
+        <div class="card-label">Inventory</div>
+        <div class="card-title">View Blood Stock</div>
+        <p class="card-desc">Check current blood inventory levels by type.</p>
+    </a>
+
+    <a class="dashboard-card" href="/request_blood">
+        <div class="card-top">
+            <div class="card-icon">🚑</div>
+            <span class="card-arrow">→</span>
+        </div>
+        <div class="card-label">Requests</div>
+        <div class="card-title">Request Blood</div>
+        <p class="card-desc">Submit an urgent request for a blood type.</p>
+    </a>
+
+    <a class="dashboard-card" href="/view_donors">
+        <div class="card-top">
+            <div class="card-icon">👥</div>
+            <span class="card-arrow">→</span>
+        </div>
+        <div class="card-label">Donors</div>
+        <div class="card-title">View Donors</div>
+        <p class="card-desc">Browse and manage all registered donors.</p>
+    </a>
+
+</div>
+
+{% endblock %}
